@@ -35,12 +35,16 @@ public class weaponsController : MonoBehaviour
             SeleccionarArmaAnterior();
             armas[indiceDeArmaActual].recargando = false;
             armas[indiceDeArmaActual].tiempoNoDisparo = false;
+            armas[indiceDeArmaActual].estaADS = false;
+
         }
         else if (ruedaMouse < 0f)
         {
             SeleccionarArmaSiguiente();
             armas[indiceDeArmaActual].recargando = false;
             armas[indiceDeArmaActual].tiempoNoDisparo = false;
+            armas[indiceDeArmaActual].estaADS = false;
+
 
         }
     }
