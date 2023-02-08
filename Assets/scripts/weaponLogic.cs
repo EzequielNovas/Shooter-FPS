@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public enum ModoDeDisparo
 {
@@ -20,6 +21,7 @@ public class weaponLogic : MonoBehaviour
     [Header("Referencia de Objetos")]
     public ParticleSystem fuegoDeArma;
     public Camera camaraPrincipal;
+    public Transform PuntoDeDisparo;
 
     [Header("Referencia de Sonidos")]
     public AudioClip SonDisparo;
@@ -121,6 +123,27 @@ public class weaponLogic : MonoBehaviour
         ReproducirAnimacionDisparo();
         balasEnCartucho--;
         StartCoroutine(ReiniciarTiempoNoDisparo());
+        DisparoDirecto();
+    }
+    void DisparoDirecto()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(PuntoDeDisparo.position, PuntoDeDisparo.forward, out hit))
+        {
+            if (hit.transform.CompareTag("Enemigo"))
+            {
+                HP HP = hit.transform.GetComponent<HP>();
+                if (HP == null)
+                {
+                    throw new System.Exception("No se encontro ek componente vida del enemigo");
+                }
+                else
+                {
+                    HP.RecibirDaño(daño);
+                }
+            }
+        }
+
     }
 
     public virtual void ReproducirAnimacionDisparo()
