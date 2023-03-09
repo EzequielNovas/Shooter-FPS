@@ -17,6 +17,8 @@ public class EnemyLogic : MonoBehaviour
     public float angularSpeed = 120;
     public float daño = 25;
     public bool mirando;
+    public bool sumarPuntos = false;
+    public GameObject puntajePantalla;
 
     // Use this for initialization
     void Start()
@@ -71,6 +73,12 @@ public class EnemyLogic : MonoBehaviour
         if (Vida0) return;
         if (HP.valor <= 0)
         {
+            sumarPuntos = true;
+            if (sumarPuntos)
+            {
+                puntajePantalla.GetComponent<Score>().valor += 1;
+                sumarPuntos = false; 
+            }
             Vida0 = true;
             agente.isStopped = true;
             collider.enabled = false;

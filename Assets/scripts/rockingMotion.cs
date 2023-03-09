@@ -8,9 +8,9 @@ public class rockingMotion : MonoBehaviour
     public float bobbingSpeed = 0.18f;
     public float bobbingAmount = 0.2f;
     public float midpoint = 2.0f;
-    public weaponLogic weaponLogic;
+    public WeaponLogic weaponLogic;
 
-    void Update()
+    void FixedUpdate()
     {
         float waveslice = 0.0f;
         float horizontal = Input.GetAxis("Horizontal");

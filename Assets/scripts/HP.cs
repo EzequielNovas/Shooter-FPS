@@ -5,6 +5,11 @@ using UnityEngine;
 public class HP : MonoBehaviour
 {
     public float valor = 100;
+    public HP padreRef;
+    public float multiplicadorDeDaño = 1.0f;
+    public GameObject textoFlotantePrefab;
+    public float DañoTotal;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,12 +23,30 @@ public class HP : MonoBehaviour
     }
     public void RecibirDaño(float daño)
     {
+        daño *= multiplicadorDeDaño;
+        if (padreRef!= null)
+        {
+            padreRef.RecibirDaño(daño);
+            return;
+        }
         valor -= daño;
+        DañoTotal = daño;
+        if (valor>= 0)
+            MostrarTextoFlotante();
+
+
         if (valor < 0)
         {
             valor = 0;
+            MostrarTextoFlotante();
         }
     }
+    void  MostrarTextoFlotante()
+    {
+        var go = Instantiate(textoFlotantePrefab, transform.position, Quaternion.identity, transform);
+        go.GetComponent<TextMesh>().text = DañoTotal.ToString();
+    }
+    
 }
 
 

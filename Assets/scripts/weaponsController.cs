@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class weaponsController : MonoBehaviour
 {
-    public weaponLogic[] armas;
+    public WeaponLogic[] armas;
     private int indiceDeArmaActual = 0;
 
     // Start is called before the first frame update
@@ -14,10 +14,9 @@ public class weaponsController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         RevisarCambioDeArma();
-
     }
     private void CambiarArmaActual()
     {

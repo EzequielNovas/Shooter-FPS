@@ -10,7 +10,7 @@ public enum ModoDeDisparo
     FullAuto
 }
 
-public class weaponLogic : MonoBehaviour
+public class WeaponLogic : MonoBehaviour
 {
     protected Animator animator;
     protected AudioSource audioSource;
@@ -22,6 +22,7 @@ public class weaponLogic : MonoBehaviour
     public ParticleSystem fuegoDeArma;
     public Camera camaraPrincipal;
     public Transform PuntoDeDisparo;
+    public GameObject efectoDañoPrefab;
 
     [Header("Referencia de Sonidos")]
     public AudioClip SonDisparo;
@@ -61,7 +62,7 @@ public class weaponLogic : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (modoDeDisparo == ModoDeDisparo.FullAuto && Input.GetButton("Fire1"))
         {
@@ -125,6 +126,11 @@ public class weaponLogic : MonoBehaviour
         StartCoroutine(ReiniciarTiempoNoDisparo());
         DisparoDirecto();
     }
+    public void CrearEfectoDaño(Vector3 pos, Quaternion rot)
+    {
+        GameObject efectoDaño = Instantiate(efectoDañoPrefab, pos, rot);
+        Destroy(efectoDaño, 1f);
+    }
     void DisparoDirecto()
     {
         RaycastHit hit;
@@ -140,6 +146,7 @@ public class weaponLogic : MonoBehaviour
                 else
                 {
                     HP.RecibirDaño(daño);
+                    CrearEfectoDaño(hit.point,hit.transform.rotation);
                 }
             }
         }

@@ -8,11 +8,13 @@ public class PlayerLogic : MonoBehaviour
     public HP vida;
     public bool Vida0 = false;
     [SerializeField] private Animator animadorPerder;
+    public Score score;
 
     // Use this for initialization
     void Start()
     {
         vida = GetComponent<HP>();
+        score.valor = 0;
     }
 
     // Update is called once per frame
@@ -26,6 +28,7 @@ public class PlayerLogic : MonoBehaviour
         if (Vida0) return;
         if (vida.valor <= 0)
         {
+            AudioListener.volume = 0;
             Vida0 = true;
             Invoke("ReiniciarJuego", 2f);
         }
@@ -34,6 +37,8 @@ public class PlayerLogic : MonoBehaviour
     void ReiniciarJuego()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        score.valor = 0;
+        AudioListener.volume = 1;
     }
 
 
