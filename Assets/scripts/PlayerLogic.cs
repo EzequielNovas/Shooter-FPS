@@ -30,7 +30,7 @@ public class PlayerLogic : MonoBehaviour
         {
             AudioListener.volume = 0;
             Vida0 = true;
-            Invoke("ReiniciarJuego", 2f);
+            Invoke("ReiniciarJuego", 1f);
         }
     }
 

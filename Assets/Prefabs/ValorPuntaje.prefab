@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aacfdff62916f3c48918dbbff7baf642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  valor: 0
+  valor: 7
   score: {fileID: 0}
   text: {fileID: 0}
+  VictoryMenu: {fileID: 0}

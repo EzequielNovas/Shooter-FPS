@@ -12,7 +12,11 @@ public class MenuPause : MonoBehaviour
     public bool juegoPausado = false;
 
 
-    private void Start() => _musicManager = Camera.main.GetComponent<MusicManager>();
+    private void Start()
+    {
+        _musicManager = Camera.main.GetComponent<MusicManager>();
+    }
+
 
     private void Update()
     {
@@ -44,8 +48,6 @@ public class MenuPause : MonoBehaviour
         menuPausa.SetActive(false);
         menuOptions.SetActive(false);
     }
-
-
     public void BackToMenu()
     { 
         SceneManager.LoadScene(0);
@@ -70,4 +72,6 @@ public class MenuPause : MonoBehaviour
     {
         QualitySettings.SetQualityLevel(index);
     }
+
+    public void NextLevel() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 }

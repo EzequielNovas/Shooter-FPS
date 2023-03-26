@@ -170,7 +170,6 @@ public class WeaponLogic : MonoBehaviour
         {
             animator.CrossFadeInFixedTime("Fire", 0.1f);
         }
-
     }
 
     void SinBalas()

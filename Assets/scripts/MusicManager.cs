@@ -3,7 +3,7 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour
 {
     private AudioSource _musicSource;
-    private void Awake()
+      private void Awake()
     {
         _musicSource = GetComponent<AudioSource>();
         _musicSource.Play();

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SocialPlatforms.Impl;
+
 public class EnemyLogic : MonoBehaviour
 {
     private GameObject target;
@@ -11,6 +13,8 @@ public class EnemyLogic : MonoBehaviour
     private Collider collider;
     private HP HPPlayer;
     private PlayerLogic PlayerLogic;
+    private CollisionFlags m_CollisionFlags;
+    private CharacterController m_CharacterController;
     public bool Vida0 = false;
     public bool estaAtacando = false;
     public float speed = 1.0f;
@@ -124,5 +128,19 @@ public class EnemyLogic : MonoBehaviour
         agente.speed = speed;
         agente.angularSpeed = angularSpeed;
     }
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Rigidbody body = hit.collider.attachedRigidbody;
+        //dont move the rigidbody if the character is on top of it
+        if (m_CollisionFlags == CollisionFlags.Below)
+        {
+            return;
+        }
 
+        if (body == null || body.isKinematic)
+        {
+            return;
+        }
+        body.AddForceAtPosition(m_CharacterController.velocity * 0.1f, hit.point, ForceMode.Impulse);
+    }
 }
