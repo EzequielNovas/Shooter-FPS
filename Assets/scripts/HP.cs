@@ -10,10 +10,10 @@ public class HP : MonoBehaviour
     public GameObject textoFlotantePrefab;
     public float DañoTotal;
 
+
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -24,6 +24,7 @@ public class HP : MonoBehaviour
     public void RecibirDaño(float daño)
     {
         daño *= multiplicadorDeDaño;
+
         if (padreRef!= null)
         {
             padreRef.RecibirDaño(daño);

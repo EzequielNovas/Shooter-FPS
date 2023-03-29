@@ -769,6 +769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964b17316b0b4134bb2e2ff4d1b04837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screenHP: {fileID: 0}
   valor: 100
   padreRef: {fileID: 0}
   "multiplicadorDeDa\xF1o": 1
@@ -2047,6 +2048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964b17316b0b4134bb2e2ff4d1b04837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screenHP: {fileID: 0}
   valor: 100
   padreRef: {fileID: 9054562889403571674}
   "multiplicadorDeDa\xF1o": 2

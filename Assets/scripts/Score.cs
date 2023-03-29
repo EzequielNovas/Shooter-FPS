@@ -12,6 +12,7 @@ public class Score : MonoBehaviour
     public GameObject victoryMenu;
     public MusicManager musicManager;
     public int poinsToWin = 15;
+    public GameObject HUD;
 
 
     void Start()
@@ -36,6 +37,7 @@ public class Score : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         musicManager.SwitchMusic(enabled);
+        HUD.SetActive(false);
 
     }
 }
