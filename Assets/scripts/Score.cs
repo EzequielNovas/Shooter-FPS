@@ -1,8 +1,6 @@
-
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Audio;
+
 
 public class Score : MonoBehaviour
 { 
@@ -15,9 +13,10 @@ public class Score : MonoBehaviour
     public GameObject HUD;
 
 
+
     void Start()
     {
-        valor = 0;
+       score.valor = 0;
     }
 
     // Update is called once per frame

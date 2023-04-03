@@ -1,19 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class weaponsController : MonoBehaviour
 {
-    public WeaponLogic[] armas;
+    public WeaponLogic[] weapons;
+    public GameObject weapon1, weapon2;
     private int indiceDeArmaActual = 0;
+
 
     // Start is called before the first frame update
     void Start()
     {
         
     }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         RevisarCambioDeArma();
@@ -24,34 +23,53 @@ public class weaponsController : MonoBehaviour
         {
             transform.GetChild(i).gameObject.SetActive(false);
         }
-        armas[indiceDeArmaActual].gameObject.SetActive(true);
+        weapons[indiceDeArmaActual].gameObject.SetActive(true);
     }
    void RevisarCambioDeArma()
     {
+        //It is used to change the weapon with the mouse wheel
+
         float ruedaMouse = Input.GetAxis("Mouse ScrollWheel");
         if (ruedaMouse > 0f)
         {
             SeleccionarArmaAnterior();
-            armas[indiceDeArmaActual].recargando = false;
-            armas[indiceDeArmaActual].tiempoNoDisparo = false;
-            armas[indiceDeArmaActual].estaADS = false;
+            weapons[indiceDeArmaActual].recargando = false;
+            weapons[indiceDeArmaActual].tiempoNoDisparo = false;
+            weapons[indiceDeArmaActual].estaADS = false;
 
         }
         else if (ruedaMouse < 0f)
         {
             SeleccionarArmaSiguiente();
-            armas[indiceDeArmaActual].recargando = false;
-            armas[indiceDeArmaActual].tiempoNoDisparo = false;
-            armas[indiceDeArmaActual].estaADS = false;
+            weapons[indiceDeArmaActual].recargando = false;
+            weapons[indiceDeArmaActual].tiempoNoDisparo = false;
+            weapons[indiceDeArmaActual].estaADS = false;
+        }
 
+        //and this to change the weapons with the numbers of the keyboard
 
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            weapon1.SetActive(true);
+            weapon2.SetActive(false);
+            weapons[indiceDeArmaActual].recargando = false;
+            weapons[indiceDeArmaActual].tiempoNoDisparo = false;
+            weapons[indiceDeArmaActual].estaADS = false;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            weapon1.SetActive(false);
+            weapon2.SetActive(true);
+            weapons[indiceDeArmaActual].recargando = false;
+            weapons[indiceDeArmaActual].tiempoNoDisparo = false;
+            weapons[indiceDeArmaActual].estaADS = false;
         }
     }
     void SeleccionarArmaAnterior()
     {
         if(indiceDeArmaActual == 0)
         {
-            indiceDeArmaActual = armas.Length - 1;
+            indiceDeArmaActual = weapons.Length - 1;
         }
         else
         {
@@ -61,7 +79,7 @@ public class weaponsController : MonoBehaviour
     }
     void SeleccionarArmaSiguiente()
     {
-        if(indiceDeArmaActual >=(armas.Length - 1))
+        if(indiceDeArmaActual >=(weapons.Length - 1))
         {
             indiceDeArmaActual = 0;
         }

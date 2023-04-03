@@ -1,45 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerLogic : MonoBehaviour
 {
+    public MusicManager _musicManager;
+    [SerializeField] private GameObject menuLose;
     public HP vida;
     public bool Vida0 = false;
-    [SerializeField] private Animator animadorPerder;
+    public GameObject HUD;
     public Score score;
+
 
     // Use this for initialization
     void Start()
     {
         vida = GetComponent<HP>();
-        score.valor = 0;
+        Time.timeScale= 1.0f;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        RevisarVida();
+      if (vida.valor == 0)
+      {
+          menuLose.gameObject.SetActive(true);
+            Time.timeScale = 0f;
+          _musicManager.SwitchMusic(menuLose);
+          HUD.SetActive(false);
+          Cursor.lockState = CursorLockMode.None;
+          Cursor.visible = true;
+      }
+
     }
-
-    void RevisarVida()
-    {
-        if (Vida0) return;
-        if (vida.valor <= 0)
-        {
-            AudioListener.volume = 0;
-            Vida0 = true;
-            Invoke("ReiniciarJuego", 1f);
-        }
-    }
-
-    void ReiniciarJuego()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        score.valor = 0;
-        AudioListener.volume = 1;
-    }
-
-
 }

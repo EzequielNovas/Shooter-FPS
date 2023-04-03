@@ -2,13 +2,15 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
-public class MenuPause : MonoBehaviour
+public class Menus : MonoBehaviour
 {
     [SerializeField] private GameObject menuPausa;
     [SerializeField] private GameObject menuOptions;
     [SerializeField] private AudioMixer audioMixerMusic;
     [SerializeField] private AudioMixer audioMixerGeneral;
     private MusicManager _musicManager;
+    private PlayerLogic playerLogic;
+
     public bool juegoPausado = false;
 
 

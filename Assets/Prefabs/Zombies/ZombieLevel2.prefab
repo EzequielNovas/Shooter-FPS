@@ -685,6 +685,7 @@ GameObject:
   - component: {fileID: 1885060438294083925}
   - component: {fileID: 1885060438294083922}
   - component: {fileID: 1885060438294083920}
+  - component: {fileID: 68048647281390498}
   m_Layer: 0
   m_Name: ZombieLevel2
   m_TagString: Enemigo
@@ -769,6 +770,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964b17316b0b4134bb2e2ff4d1b04837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletImpact: {fileID: 8300000, guid: b48316b2bfecbf144bbc40fcc43bbcac, type: 3}
+  audioSource: {fileID: 68048647281390498}
   valor: 100
   padreRef: {fileID: 0}
   "multiplicadorDeDa\xF1o": 1
@@ -794,6 +797,8 @@ MonoBehaviour:
   mirando: 0
   sumarPuntos: 0
   puntajePantalla: {fileID: 3742821256179588255, guid: 2339d3a064cfcd14bbe11fe913a8fbe2, type: 3}
+  scream: {fileID: 8300000, guid: 1e39f0e5586777d49851b6658e7bfde5, type: 3}
+  audioSource: {fileID: 68048647281390498}
 --- !u!195 &1885060438294083920
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -816,6 +821,102 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!82 &68048647281390498
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885060438294052774}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 9e1234fbc86ce214aad8da22f3f9de6a, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1885060438294052784
 GameObject:
   m_ObjectHideFlags: 0
@@ -2197,6 +2298,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964b17316b0b4134bb2e2ff4d1b04837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletImpact: {fileID: 8300000, guid: b48316b2bfecbf144bbc40fcc43bbcac, type: 3}
+  audioSource: {fileID: 68048647281390498}
   valor: 100
   padreRef: {fileID: 1885060438294083925}
   "multiplicadorDeDa\xF1o": 2

@@ -23,6 +23,9 @@ public class EnemyLogic : MonoBehaviour
     public bool mirando;
     public bool sumarPuntos = false;
     public GameObject puntajePantalla;
+    public AudioClip scream;
+    public AudioSource audioSource;
+
 
     // Use this for initialization
     void Start()
@@ -115,6 +118,7 @@ public class EnemyLogic : MonoBehaviour
     void Atacar()
     {
         HPPlayer.RecibirDaño(daño);
+        audioSource.PlayOneShot(scream);
         agente.speed = 0;
         agente.angularSpeed = 0;
         estaAtacando = true;
@@ -128,19 +132,4 @@ public class EnemyLogic : MonoBehaviour
         agente.speed = speed;
         agente.angularSpeed = angularSpeed;
     }
-    //private void OnControllerColliderHit(ControllerColliderHit hit)
-    //{
-    //    Rigidbody body = hit.collider.attachedRigidbody;
-    //    //dont move the rigidbody if the character is on top of it
-    //    if (m_CollisionFlags == CollisionFlags.Below)
-    //    {
-    //        return;
-    //    }
-
-    //    if (body == null || body.isKinematic)
-    //    {
-    //        return;
-    //    }
-    //    body.AddForceAtPosition(m_CharacterController.velocity * 0.1f, hit.point, ForceMode.Impulse);
-    //}
 }

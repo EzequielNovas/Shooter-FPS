@@ -14,6 +14,9 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene(numeroNivel);
         Time.timeScale = 1f;
     }
-    public void QuitGame() => Application.Quit();
-    
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("quit game...");
+    }
 }

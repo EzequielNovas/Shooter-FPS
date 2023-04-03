@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HP : MonoBehaviour
 {
+    public AudioClip bulletImpact;
+    public AudioSource audioSource;
     public float valor = 100;
     public HP padreRef;
     public float multiplicadorDeDaño = 1.0f;
@@ -23,6 +25,7 @@ public class HP : MonoBehaviour
     }
     public void RecibirDaño(float daño)
     {
+        audioSource.PlayOneShot(bulletImpact);
         daño *= multiplicadorDeDaño;
 
         if (padreRef!= null)
