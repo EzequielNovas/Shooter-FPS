@@ -1,21 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class ScreenBullets : MonoBehaviour
 {
     public Text Text;
     public WeaponLogic weaponLogic;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Text.text = weaponLogic.balasEnCartucho + "/" + weaponLogic.tamañoDeCartcho + "\n" + weaponLogic.balasRestantes;
-    }
+    void Update() => Text.text = weaponLogic.bulletsInCartridge + "/" + weaponLogic.cartridgeSize + "\n" + weaponLogic.remainingBullets;
 }

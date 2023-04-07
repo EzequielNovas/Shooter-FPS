@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
-
 public class Menus : MonoBehaviour
 {
     [SerializeField] private GameObject menuPausa;
@@ -9,16 +8,10 @@ public class Menus : MonoBehaviour
     [SerializeField] private AudioMixer audioMixerMusic;
     [SerializeField] private AudioMixer audioMixerGeneral;
     private MusicManager _musicManager;
-    private PlayerLogic playerLogic;
-
     public bool juegoPausado = false;
 
 
-    private void Start()
-    {
-        _musicManager = Camera.main.GetComponent<MusicManager>();
-    }
-
+    private void Start() => _musicManager = Camera.main.GetComponent<MusicManager>();
 
     private void Update()
     {
@@ -33,8 +26,8 @@ public class Menus : MonoBehaviour
 
     public void Pausa()
     {
-        juegoPausado = true;
-        Time.timeScale = 0f;
+        juegoPausado     = true;
+        Time.timeScale   = 0f;
         Cursor.lockState = CursorLockMode.None;
         _musicManager.SwitchMusic(juegoPausado);
         menuPausa.SetActive(true);
@@ -50,30 +43,18 @@ public class Menus : MonoBehaviour
         menuPausa.SetActive(false);
         menuOptions.SetActive(false);
     }
-    public void BackToMenu()
-    { 
-        SceneManager.LoadScene(0);
-    }
+    public void BackToMenu() => SceneManager.LoadScene(0);
 
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
     }
-    public void ChangeVolumeMusic(float volume)
-    {
-        audioMixerMusic.SetFloat("Volume0", volume);
-    }
+    public void ChangeVolumeMusic(float volume) => audioMixerMusic.SetFloat("Volume0", volume);
 
-    public void ChangeVolumeGeneral(float volume)
-    {
-        audioMixerGeneral.SetFloat("Volume1", volume);
-    }
+    public void ChangeVolumeGeneral(float volume) => audioMixerGeneral.SetFloat("Volume1", volume);
 
-    public void ChangeQuality(int index)
-    {
-        QualitySettings.SetQualityLevel(index);
-    }
+    public void ChangeQuality(int index) => QualitySettings.SetQualityLevel(index);
 
     public void NextLevel() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 }

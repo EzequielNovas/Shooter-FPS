@@ -562,32 +562,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f8e78b0e1b60c44a1506c6a57431f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiempoNoDisparo: 0
-  puedeDisparar: 0
-  recargando: 0
-  fuegoDeArma: {fileID: 285121116}
-  camaraPrincipal: {fileID: 1715773028}
-  PuntoDeDisparo: {fileID: 731529744}
-  "efectoDa\xF1oPrefab": {fileID: 6606268260636193754, guid: 5bb52b8b49a1c1c42921bbb2fcbb1bf5, type: 3}
-  SonDisparo: {fileID: 8300000, guid: 7e1172b166b6e064185d584cb2f171c9, type: 3}
-  SonSinBalas: {fileID: 8300000, guid: 678e850f1ee5e5946b54d35863c38e55, type: 3}
-  SonCartuchoEntra: {fileID: 8300000, guid: fa57296f8d7241343a52066da44fe1ee, type: 3}
-  SonCartuchoSale: {fileID: 8300000, guid: eb29e47e480502343a766d7fe3054b6b, type: 3}
-  SonVacio: {fileID: 8300000, guid: 76af573fc782c8541ab0b56f5b783d91, type: 3}
-  SonDesenfundar: {fileID: 0}
-  modoDeDisparo: 0
-  "da\xF1o": 40
-  ritmoDeDisparo: 0.6
-  balasRestantes: 7
-  balasEnCartucho: 7
-  "tama\xF1oDeCartcho": 7
-  maximoDeBalas: 70
-  estaADS: 0
-  disCadera: {x: 0.18, y: -0.723, z: 0}
-  ADS: {x: 0.006, y: -0.714, z: 0}
-  tiempoApuntar: 5
+  timeNoShoot: 0
+  canShoot: 0
+  reloading: 0
+  gunFire: {fileID: 2059859173}
+  mainCamera: {fileID: 1715773028}
+  GunSight: {fileID: 731529744}
+  damageEffectPrefab: {fileID: 6606268260636193754, guid: 5bb52b8b49a1c1c42921bbb2fcbb1bf5, type: 3}
+  SoundShoot: {fileID: 8300000, guid: 7e1172b166b6e064185d584cb2f171c9, type: 3}
+  SoundNoBullets: {fileID: 8300000, guid: 678e850f1ee5e5946b54d35863c38e55, type: 3}
+  SoundCartridgeIn: {fileID: 8300000, guid: eb29e47e480502343a766d7fe3054b6b, type: 3}
+  SoundCartridgeOut: {fileID: 8300000, guid: fa57296f8d7241343a52066da44fe1ee, type: 3}
+  SoundEmpty: {fileID: 8300000, guid: 76af573fc782c8541ab0b56f5b783d91, type: 3}
+  SoundDraw: {fileID: 0}
+  shootingMode: 0
+  Damage: 40
+  firingRate: 0.5
+  isADS: 0
+  cartridgeSize: 7
+  maximumBullets: 70
+  remainingBullets: 0
+  bulletsInCartridge: 0
+  timeAim: 4
   zoom: 40
   normal: 60
+  ADS: {x: 0, y: -0.76, z: 0.06}
+  shotFromHip: {x: 0.255, y: -0.778, z: 0}
 --- !u!114 &60462963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,10 +614,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0205428765ca927439fa26bc549fe54b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cantidad: 0.5
-  cantidadMax: 0.5
-  tiempo: 2
-  seBalancea: 1
+  amount: 0.3
+  amountMax: 0.3
+  time: 2
+  sways: 0
 --- !u!114 &60462966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -630,9 +630,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b285c3b941f9a4fa65f1924b2a4d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bobbingSpeed: 0.05
-  bobbingAmount: 0.02
-  midpoint: -0.723
+  bobbingSpeed: 0.015
+  bobbingAmount: 0.03
+  midpoint: -0.778
   weaponLogic: {fileID: 60462962}
 --- !u!1 &106882889
 GameObject:
@@ -1119,7 +1119,7 @@ GameObject:
   - component: {fileID: 138095166}
   - component: {fileID: 138095165}
   m_Layer: 0
-  m_Name: Balas
+  m_Name: Bullets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1682,11 +1682,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 42765f0df33b0cd48826e4bf5105b3c1, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93e86b57e56570d46814839867bf9a52, type: 3}
---- !u!198 &285121116 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 198000012944515248, guid: 9defeac88977c0d448aa4541073ee9e4, type: 3}
-  m_PrefabInstance: {fileID: 2059859172}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &348731120
 GameObject:
   m_ObjectHideFlags: 0
@@ -2076,32 +2071,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f8e78b0e1b60c44a1506c6a57431f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiempoNoDisparo: 0
-  puedeDisparar: 0
-  recargando: 0
-  fuegoDeArma: {fileID: 1451413309}
-  camaraPrincipal: {fileID: 1715773028}
-  PuntoDeDisparo: {fileID: 731529744}
-  "efectoDa\xF1oPrefab": {fileID: 6606268260636193754, guid: 5bb52b8b49a1c1c42921bbb2fcbb1bf5, type: 3}
-  SonDisparo: {fileID: 8300000, guid: 79bdaa501a5fc4b41a005e90dd09d2e0, type: 3}
-  SonSinBalas: {fileID: 8300000, guid: 678e850f1ee5e5946b54d35863c38e55, type: 3}
-  SonCartuchoEntra: {fileID: 8300000, guid: e589257cb9eedf74a8e505318a6e7f98, type: 3}
-  SonCartuchoSale: {fileID: 8300000, guid: 30f315ff55b6a1a45a8b6de2bdf24a37, type: 3}
-  SonVacio: {fileID: 8300000, guid: be84c78cd01fa6044ab5e4869890ef4d, type: 3}
-  SonDesenfundar: {fileID: 8300000, guid: d0970c5f59abe8344bb56c7fc8f2f107, type: 3}
-  modoDeDisparo: 1
-  "da\xF1o": 25
-  ritmoDeDisparo: 0.3
-  balasRestantes: 0
-  balasEnCartucho: 0
-  "tama\xF1oDeCartcho": 12
-  maximoDeBalas: 120
-  estaADS: 0
-  disCadera: {x: 0.18, y: -0.76, z: 0.06}
-  ADS: {x: 0.001, y: -0.747, z: 0.06}
-  tiempoApuntar: 7
+  timeNoShoot: 0
+  canShoot: 0
+  reloading: 0
+  gunFire: {fileID: 1451413309}
+  mainCamera: {fileID: 1715773028}
+  GunSight: {fileID: 731529744}
+  damageEffectPrefab: {fileID: 6606268260636193754, guid: 5bb52b8b49a1c1c42921bbb2fcbb1bf5, type: 3}
+  SoundShoot: {fileID: 8300000, guid: 79bdaa501a5fc4b41a005e90dd09d2e0, type: 3}
+  SoundNoBullets: {fileID: 8300000, guid: 678e850f1ee5e5946b54d35863c38e55, type: 3}
+  SoundCartridgeIn: {fileID: 8300000, guid: e589257cb9eedf74a8e505318a6e7f98, type: 3}
+  SoundCartridgeOut: {fileID: 8300000, guid: 30f315ff55b6a1a45a8b6de2bdf24a37, type: 3}
+  SoundEmpty: {fileID: 8300000, guid: d0970c5f59abe8344bb56c7fc8f2f107, type: 3}
+  SoundDraw: {fileID: 8300000, guid: d0970c5f59abe8344bb56c7fc8f2f107, type: 3}
+  shootingMode: 1
+  Damage: 25
+  firingRate: 0.3
+  isADS: 0
+  cartridgeSize: 12
+  maximumBullets: 120
+  remainingBullets: 0
+  bulletsInCartridge: 0
+  timeAim: 6
   zoom: 50
   normal: 60
+  ADS: {x: 0, y: -0.76, z: 0.06}
+  shotFromHip: {x: 0.255, y: -0.778, z: 0.06}
 --- !u!82 &408166157
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2229,10 +2224,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0205428765ca927439fa26bc549fe54b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cantidad: 0.3
-  cantidadMax: 0.3
-  tiempo: 2
-  seBalancea: 1
+  amount: 0.3
+  amountMax: 0.3
+  time: 2
+  sways: 1
 --- !u!114 &408166163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2245,9 +2240,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b285c3b941f9a4fa65f1924b2a4d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bobbingSpeed: 0.05
-  bobbingAmount: 0.02
-  midpoint: -0.76
+  bobbingSpeed: 0.015
+  bobbingAmount: 0.03
+  midpoint: -0.778
   weaponLogic: {fileID: 408166156}
 --- !u!1001 &416703429
 PrefabInstance:
@@ -2663,11 +2658,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400032, guid: 8da0c404c264dd1448af9486c36bfee0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.18
+      value: 0.255
       objectReference: {fileID: 0}
     - target: {fileID: 400032, guid: 8da0c404c264dd1448af9486c36bfee0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.723
+      value: -0.778
       objectReference: {fileID: 0}
     - target: {fileID: 400032, guid: 8da0c404c264dd1448af9486c36bfee0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3103,11 +3098,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: cda62c486770efb46b8a593047db73be, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.18
+      value: 0.255
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: cda62c486770efb46b8a593047db73be, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.76
+      value: -0.778
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: cda62c486770efb46b8a593047db73be, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3161,7 +3156,7 @@ GameObject:
   m_Component:
   - component: {fileID: 471595765}
   m_Layer: 0
-  m_Name: PuntoDeDisparo
+  m_Name: TriggerPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4446,7 +4441,7 @@ GameObject:
   - component: {fileID: 743296650}
   - component: {fileID: 743296649}
   m_Layer: 0
-  m_Name: mira
+  m_Name: scope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4823,7 +4818,7 @@ GameObject:
   m_Component:
   - component: {fileID: 830045615}
   m_Layer: 0
-  m_Name: Mapa
+  m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6893,11 +6888,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombiePrefab: {fileID: 9054562889403472681, guid: fef497231a3d68a4a957387df3a8a607, type: 3}
-  puntosDeGeneracion:
-  - {fileID: 1155579609}
-  - {fileID: 1900785848}
-  - {fileID: 1900785848}
-  tiempoDeGeneracion: 5
+  zombieSpawners: []
+  generationTime: 5
 --- !u!1 &1288018446
 GameObject:
   m_ObjectHideFlags: 0
@@ -8150,11 +8142,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletImpact: {fileID: 8300000, guid: b48316b2bfecbf144bbc40fcc43bbcac, type: 3}
   audioSource: {fileID: 885138476}
-  valor: 100
-  padreRef: {fileID: 0}
-  "multiplicadorDeDa\xF1o": 1
-  textoFlotantePrefab: {fileID: 8951894536708090279, guid: 36c5ef1b8b8cc4f4b952d40d29a968f9, type: 3}
-  "Da\xF1oTotal": 0
+  floatingTextPrefab: {fileID: 8951894536708090279, guid: 36c5ef1b8b8cc4f4b952d40d29a968f9, type: 3}
+  fatherRef: {fileID: 0}
+  value: 100
+  damageMultiplier: 1
+  fullDamage: 0
 --- !u!114 &1715773036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8169,10 +8161,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _musicManager: {fileID: 1110213652}
   menuLose: {fileID: 45504222}
-  vida: {fileID: 1715773035}
-  Vida0: 0
+  _hp: {fileID: 1715773035}
   HUD: {fileID: 1642702188}
   score: {fileID: 478626245}
+  hp0: 0
 --- !u!1001 &1736842641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9216,6 +9208,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9defeac88977c0d448aa4541073ee9e4, type: 3}
+--- !u!198 &2059859173 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198000012944515248, guid: 9defeac88977c0d448aa4541073ee9e4, type: 3}
+  m_PrefabInstance: {fileID: 2059859172}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2082215914
 GameObject:
   m_ObjectHideFlags: 0
@@ -9552,7 +9549,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3742821256179588255, guid: 87f3033037dec8741b7f4b08f691b6fb, type: 3}
       propertyPath: m_Name
-      value: Puntaje
+      value: score
       objectReference: {fileID: 0}
     - target: {fileID: 5269263913694277985, guid: 87f3033037dec8741b7f4b08f691b6fb, type: 3}
       propertyPath: HUD

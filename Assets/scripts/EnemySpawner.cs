@@ -1,38 +1,29 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject zombiePrefab;
-    public Transform[] puntosDeGeneracion;
-    public float tiempoDeGeneracion = 5f;
-    // Use this for initialization
+    public Transform[] zombieSpawners;
+    public float generationTime = 5f;
     void Start()
     {
-        puntosDeGeneracion = new Transform[transform.childCount];
+        zombieSpawners = new Transform[transform.childCount];
         for (int i = 0; i < transform.childCount; i++)
-        {
-            puntosDeGeneracion[i] = transform.GetChild(i);
-
-        }
-
-        StartCoroutine(AparecerEnemigo());
+            zombieSpawners[i] = transform.GetChild(i);
+        
+        StartCoroutine(CreateEnemy());
     }
 
-    IEnumerator AparecerEnemigo()
+    IEnumerator CreateEnemy()
     {
         while (true)
         {
-            for (int i = 0; i < puntosDeGeneracion.Length; i++)
+            for (int i = 0; i < zombieSpawners.Length; i++)
             {
-                Transform puntoDeGeneracion = puntosDeGeneracion[i];
-                Instantiate(zombiePrefab, puntoDeGeneracion.position, puntoDeGeneracion.rotation);
+                Transform zombieSpawner = zombieSpawners[i];
+                Instantiate(zombiePrefab, zombieSpawner.position, zombieSpawner.rotation);
             }
-            yield return new WaitForSeconds(tiempoDeGeneracion);
+            yield return new WaitForSeconds(generationTime);
         }
     }
-
-
-    // Update is called once per frame
 }

@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 1288025881836213655}
   m_Layer: 0
   m_Name: Bip01 Head
-  m_TagString: Enemigo
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -238,11 +238,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletImpact: {fileID: 8300000, guid: b48316b2bfecbf144bbc40fcc43bbcac, type: 3}
   audioSource: {fileID: 676370645340310656}
-  valor: 100
-  padreRef: {fileID: 4505780978669880841}
-  "multiplicadorDeDa\xF1o": 2
-  textoFlotantePrefab: {fileID: 8951894536708090279, guid: 36c5ef1b8b8cc4f4b952d40d29a968f9, type: 3}
-  "Da\xF1oTotal": 0
+  floatingTextPrefab: {fileID: 8951894536708090279, guid: 36c5ef1b8b8cc4f4b952d40d29a968f9, type: 3}
+  fatherRef: {fileID: 4505780978669880841}
+  value: 100
+  damageMultiplier: 2
+  fullDamage: 0
 --- !u!1 &4505780978669912230
 GameObject:
   m_ObjectHideFlags: 0
@@ -2285,7 +2285,7 @@ GameObject:
   - component: {fileID: 676370645340310656}
   m_Layer: 0
   m_Name: BabyZombie
-  m_TagString: Enemigo
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2369,11 +2369,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletImpact: {fileID: 8300000, guid: b48316b2bfecbf144bbc40fcc43bbcac, type: 3}
   audioSource: {fileID: 676370645340310656}
-  valor: 100
-  padreRef: {fileID: 0}
-  "multiplicadorDeDa\xF1o": 1
-  textoFlotantePrefab: {fileID: 8951894536708090279, guid: 36c5ef1b8b8cc4f4b952d40d29a968f9, type: 3}
-  "Da\xF1oTotal": 0
+  floatingTextPrefab: {fileID: 8951894536708090279, guid: 36c5ef1b8b8cc4f4b952d40d29a968f9, type: 3}
+  fatherRef: {fileID: 0}
+  value: 100
+  damageMultiplier: 1
+  fullDamage: 0
 --- !u!114 &4505780978669880846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2386,16 +2386,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a703a34b4a75945875867af3952e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Vida0: 0
-  estaAtacando: 0
+  audioSource: {fileID: 676370645340310656}
+  screenScore: {fileID: 3742821256179588255, guid: 2339d3a064cfcd14bbe11fe913a8fbe2, type: 3}
+  scream: {fileID: 8300000, guid: 1e39f0e5586777d49851b6658e7bfde5, type: 3}
+  hp0: 0
+  isAttacking: 0
+  looking: 0
+  addPoints: 0
   speed: 2.5
   angularSpeed: 120
-  "da\xF1o": 15
-  mirando: 0
-  sumarPuntos: 0
-  puntajePantalla: {fileID: 3742821256179588255, guid: 2339d3a064cfcd14bbe11fe913a8fbe2, type: 3}
-  scream: {fileID: 8300000, guid: 1e39f0e5586777d49851b6658e7bfde5, type: 3}
-  audioSource: {fileID: 676370645340310656}
+  damage: 25
 --- !u!195 &4505780978669880844
 NavMeshAgent:
   m_ObjectHideFlags: 0

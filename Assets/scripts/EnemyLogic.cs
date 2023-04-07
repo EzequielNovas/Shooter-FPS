@@ -1,135 +1,116 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SocialPlatforms.Impl;
-
 public class EnemyLogic : MonoBehaviour
 {
     private GameObject target;
-    private NavMeshAgent agente;
-    private HP HP;
+    private NavMeshAgent agent;
+    private HP _HP;
     private Animator animator;
     private Collider collider;
     private HP HPPlayer;
     private PlayerLogic PlayerLogic;
-    private CollisionFlags m_CollisionFlags;
-    private CharacterController m_CharacterController;
-    public bool Vida0 = false;
-    public bool estaAtacando = false;
+    public AudioSource audioSource;
+    public  GameObject screenScore;
+    public AudioClip scream;
+    public bool hp0 = false;
+    public bool isAttacking = false;
+    public bool looking;
+    public bool addPoints = false;
     public float speed = 1.0f;
     public float angularSpeed = 120;
-    public float daño = 25;
-    public bool mirando;
-    public bool sumarPuntos = false;
-    public GameObject puntajePantalla;
-    public AudioClip scream;
-    public AudioSource audioSource;
+    public float damage = 25;
 
-
-    // Use this for initialization
     void Start()
     {
         target = GameObject.Find("Player");
         HPPlayer = target.GetComponent<HP>();
-        if (HPPlayer == null)
-        {
-            throw new System.Exception("El objeto Jugador no tiene componente Vida");
-        }
-
+        if (HPPlayer == null) 
+            throw new System.Exception("The Player item has no Life component.");
+      
         PlayerLogic = target.GetComponent<PlayerLogic>();
 
         if (PlayerLogic == null)
-        {
-            throw new System.Exception("El objeto Jugador no tiene componente EnemyLogic");
-        }
+            throw new System.Exception("The Player object has no EnemyLogic component");
 
-        agente = GetComponent<NavMeshAgent>();
-        HP = GetComponent<HP>();
+        agent    = GetComponent<NavMeshAgent>();
+        _HP      = GetComponent<HP>();
         animator = GetComponent<Animator>();
         collider = GetComponent<Collider>();
-
     }
 
-    // Update is called once per frame
     void Update()
     {
-        RevisarVida();
-        Perseguir();
-        RevisarAtaque();
-        EstaDefrenteAlJugador();
+        ReviewLife();
+        Chase();
+        CheckAttack();
+        InFrontOfThePlayer();
     }
 
-    void EstaDefrenteAlJugador()
+    void InFrontOfThePlayer()
     {
         Vector3 adelante = transform.forward;
         Vector3 targetJugador = (GameObject.Find("Player").transform.position - transform.position).normalized;
 
         if (Vector3.Dot(adelante, targetJugador) < 0.6f)
-        {
-            mirando = false;
-        }
+        
+            looking = false;
         else
-        {
-            mirando = true;
-        }
+        
+            looking = true;
     }
 
-    void RevisarVida()
+    void ReviewLife()
     {
-        if (Vida0) return;
-        if (HP.valor <= 0)
+        if (hp0) return;
+        if (_HP.value <= 0)
         {
-            sumarPuntos = true;
-            if (sumarPuntos)
+            addPoints = true;
+            if (addPoints)
             {
-                puntajePantalla.GetComponent<Score>().valor += 1;
-                sumarPuntos = false; 
+                screenScore.GetComponent<Score>().value += 1;
+                addPoints = false; 
             }
-            Vida0 = true;
-            agente.isStopped = true;
+            hp0 = true;
+            agent.isStopped = true;
             collider.enabled = false;
-            animator.CrossFadeInFixedTime("Vida0", 0.1f);
+            animator.CrossFadeInFixedTime("hp0", 0.1f);
             Destroy(gameObject, 3f);
         }
-
     }
 
-    void Perseguir()
+    void Chase()
     {
-        if (Vida0) return;
-        if (PlayerLogic.Vida0) return;
-        agente.destination = target.transform.position;
+        if (hp0) return;
+        if (PlayerLogic.hp0) return;
+        agent.destination = target.transform.position;
     }
 
-    void RevisarAtaque()
+    void CheckAttack()
     {
-        if (Vida0) return;
-        if (estaAtacando) return;
-        if (PlayerLogic.Vida0) return;
+        if (hp0) return;
+        if (isAttacking) return;
+        if (PlayerLogic.hp0) return;
         float distanciaDelBlanco = Vector3.Distance(target.transform.position, transform.position);
 
-        if (distanciaDelBlanco <= 2.0 && mirando)
-        {
-            Atacar();
-        }
+        if (distanciaDelBlanco <= 2.0 && looking)
+        Attack();
     }
 
-    void Atacar()
+    void Attack()
     {
-        HPPlayer.RecibirDaño(daño);
+        HPPlayer.TakeDamage(damage);
         audioSource.PlayOneShot(scream);
-        agente.speed = 0;
-        agente.angularSpeed = 0;
-        estaAtacando = true;
-        animator.SetTrigger("DebeAtacar");
-        Invoke("ReiniciarAtaque", 1.5f);
+        agent.speed = 0;
+        agent.angularSpeed = 0;
+        isAttacking = true;
+        animator.SetTrigger("MustAttack");
+        Invoke("ResetAttack", 1.5f);
     }
 
-    void ReiniciarAtaque()
+    void ResetAttack()
     {
-        estaAtacando = false;
-        agente.speed = speed;
-        agente.angularSpeed = angularSpeed;
+        isAttacking = false;
+        agent.speed = speed;
+        agent.angularSpeed = angularSpeed;
     }
 }

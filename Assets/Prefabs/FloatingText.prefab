@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8556718543084087064}
   - component: {fileID: 7647704126798936183}
   m_Layer: 0
-  m_Name: TextoFlotante
+  m_Name: FloatingText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

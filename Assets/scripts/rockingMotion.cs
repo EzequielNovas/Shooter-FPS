@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class rockingMotion : MonoBehaviour
 {
     private float timer = 0.0f;
@@ -9,7 +6,6 @@ public class rockingMotion : MonoBehaviour
     public float bobbingAmount = 0.2f;
     public float midpoint = 2.0f;
     public WeaponLogic weaponLogic;
-
     void FixedUpdate()
     {
         float waveslice = 0.0f;
@@ -17,7 +13,7 @@ public class rockingMotion : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         Vector3 cSharpConversion = transform.localPosition;
 
-        if (weaponLogic.estaADS == false)
+        if (weaponLogic.isADS == false)
         {
             if (Mathf.Abs(horizontal) == 0 && Mathf.Abs(vertical) == 0)
             {

@@ -717,7 +717,7 @@ GameObject:
   - component: {fileID: 138095166}
   - component: {fileID: 138095165}
   m_Layer: 0
-  m_Name: Balas
+  m_Name: Bullets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1917,7 +1917,7 @@ GameObject:
   m_Component:
   - component: {fileID: 471595765}
   m_Layer: 0
-  m_Name: PuntoDeDisparo
+  m_Name: TriggerPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2912,7 +2912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b285c3b941f9a4fa65f1924b2a4d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bobbingSpeed: 0.05
+  bobbingSpeed: 0.018
   bobbingAmount: 0.02
   midpoint: -0.699
   weaponLogic: {fileID: 584213720}
@@ -2928,10 +2928,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0205428765ca927439fa26bc549fe54b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cantidad: 0.5
-  cantidadMax: 0.5
-  tiempo: 2
-  seBalancea: 1
+  amount: 0.1
+  amountMax: 0.1
+  time: 2
+  sways: 0
 --- !u!114 &584213720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2944,32 +2944,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f8e78b0e1b60c44a1506c6a57431f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiempoNoDisparo: 0
-  puedeDisparar: 0
-  recargando: 0
-  fuegoDeArma: {fileID: 1811501909}
-  camaraPrincipal: {fileID: 1715773028}
-  PuntoDeDisparo: {fileID: 731529744}
-  "efectoDa\xF1oPrefab": {fileID: 6606268260636193754, guid: 5bb52b8b49a1c1c42921bbb2fcbb1bf5, type: 3}
-  SonDisparo: {fileID: 8300000, guid: 0bcbb3b6374b189439871cd5774e0b2a, type: 3}
-  SonSinBalas: {fileID: 8300000, guid: 678e850f1ee5e5946b54d35863c38e55, type: 3}
-  SonCartuchoEntra: {fileID: 8300000, guid: 94e50bea0dc456d4c8d3e64ac360905f, type: 3}
-  SonCartuchoSale: {fileID: 8300000, guid: 5e0f832349da944488c2bff7ad3aef8b, type: 3}
-  SonVacio: {fileID: 8300000, guid: b7f66757f5d5ebd4ca2ade12d1890e98, type: 3}
-  SonDesenfundar: {fileID: 8300000, guid: b7f66757f5d5ebd4ca2ade12d1890e98, type: 3}
-  modoDeDisparo: 1
-  "da\xF1o": 20
-  ritmoDeDisparo: 0.1
-  balasRestantes: 0
-  balasEnCartucho: 0
-  "tama\xF1oDeCartcho": 25
-  maximoDeBalas: 250
-  estaADS: 0
-  disCadera: {x: 0.147, y: -0.699, z: -0.058}
-  ADS: {x: 0.002, y: -0.656, z: -0.058}
-  tiempoApuntar: 7
+  timeNoShoot: 0
+  canShoot: 0
+  reloading: 0
+  gunFire: {fileID: 1811501909}
+  mainCamera: {fileID: 1715773028}
+  GunSight: {fileID: 731529744}
+  damageEffectPrefab: {fileID: 6606268260636193754, guid: 5bb52b8b49a1c1c42921bbb2fcbb1bf5, type: 3}
+  SoundShoot: {fileID: 8300000, guid: 0bcbb3b6374b189439871cd5774e0b2a, type: 3}
+  SoundNoBullets: {fileID: 8300000, guid: 678e850f1ee5e5946b54d35863c38e55, type: 3}
+  SoundCartridgeIn: {fileID: 8300000, guid: 94e50bea0dc456d4c8d3e64ac360905f, type: 3}
+  SoundCartridgeOut: {fileID: 8300000, guid: 5e0f832349da944488c2bff7ad3aef8b, type: 3}
+  SoundEmpty: {fileID: 8300000, guid: b7f66757f5d5ebd4ca2ade12d1890e98, type: 3}
+  SoundDraw: {fileID: 8300000, guid: b7f66757f5d5ebd4ca2ade12d1890e98, type: 3}
+  shootingMode: 1
+  Damage: 15
+  firingRate: 0.1
+  isADS: 0
+  cartridgeSize: 30
+  maximumBullets: 300
+  remainingBullets: 0
+  bulletsInCartridge: 0
+  timeAim: 6
   zoom: 55
   normal: 60
+  ADS: {x: 0.002, y: -0.656, z: -0.058}
+  shotFromHip: {x: 0.147, y: -0.699, z: -0.058}
 --- !u!4 &584213721 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400008, guid: 435f79d47ef939a438a39aec6de1d226, type: 3}
@@ -3575,7 +3575,7 @@ GameObject:
   - component: {fileID: 743296650}
   - component: {fileID: 743296649}
   m_Layer: 0
-  m_Name: mira
+  m_Name: Scope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3952,7 +3952,7 @@ GameObject:
   m_Component:
   - component: {fileID: 830045615}
   m_Layer: 0
-  m_Name: Mapa
+  m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4815,10 +4815,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombiePrefab: {fileID: 4505780978669912314, guid: f53beb7b3c896e548bbcb573e6909afc, type: 3}
-  puntosDeGeneracion:
-  - {fileID: 1326165690}
-  - {fileID: 1251950832}
-  tiempoDeGeneracion: 3
+  zombieSpawners: []
+  generationTime: 5
 --- !u!1 &968463843
 GameObject:
   m_ObjectHideFlags: 0
@@ -5524,7 +5522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b285c3b941f9a4fa65f1924b2a4d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bobbingSpeed: 0.05
+  bobbingSpeed: 0.018
   bobbingAmount: 0.02
   midpoint: -0.755
   weaponLogic: {fileID: 990135171}
@@ -5540,10 +5538,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0205428765ca927439fa26bc549fe54b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cantidad: 0.3
-  cantidadMax: 0.3
-  tiempo: 2
-  seBalancea: 1
+  amount: 0.1
+  amountMax: 0.1
+  time: 2
+  sways: 1
 --- !u!114 &990135171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5556,32 +5554,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f8e78b0e1b60c44a1506c6a57431f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiempoNoDisparo: 0
-  puedeDisparar: 0
-  recargando: 0
-  fuegoDeArma: {fileID: 1416371648}
-  camaraPrincipal: {fileID: 1715773028}
-  PuntoDeDisparo: {fileID: 731529744}
-  "efectoDa\xF1oPrefab": {fileID: 6606268260636193754, guid: 5bb52b8b49a1c1c42921bbb2fcbb1bf5, type: 3}
-  SonDisparo: {fileID: 8300000, guid: 3a493120f7b4ff14492240888410ea94, type: 3}
-  SonSinBalas: {fileID: 8300000, guid: 678e850f1ee5e5946b54d35863c38e55, type: 3}
-  SonCartuchoEntra: {fileID: 8300000, guid: 82b5ada6b2784254da5474488979f249, type: 3}
-  SonCartuchoSale: {fileID: 8300000, guid: 86a692cf0db7ff842bffdba0c8286aed, type: 3}
-  SonVacio: {fileID: 8300000, guid: 3218610d36f622f41b94e040d94eecd6, type: 3}
-  SonDesenfundar: {fileID: 8300000, guid: 3218610d36f622f41b94e040d94eecd6, type: 3}
-  modoDeDisparo: 1
-  "da\xF1o": 50
-  ritmoDeDisparo: 0.2
-  balasRestantes: 0
-  balasEnCartucho: 0
-  "tama\xF1oDeCartcho": 30
-  maximoDeBalas: 300
-  estaADS: 0
-  disCadera: {x: 0.147, y: -0.755, z: -0.155}
-  ADS: {x: 0.006, y: -0.735, z: -0.155}
-  tiempoApuntar: 5
+  timeNoShoot: 0
+  canShoot: 0
+  reloading: 0
+  gunFire: {fileID: 1416371648}
+  mainCamera: {fileID: 1715773028}
+  GunSight: {fileID: 731529744}
+  damageEffectPrefab: {fileID: 6606268260636193754, guid: 5bb52b8b49a1c1c42921bbb2fcbb1bf5, type: 3}
+  SoundShoot: {fileID: 8300000, guid: 3a493120f7b4ff14492240888410ea94, type: 3}
+  SoundNoBullets: {fileID: 8300000, guid: 678e850f1ee5e5946b54d35863c38e55, type: 3}
+  SoundCartridgeIn: {fileID: 8300000, guid: 82b5ada6b2784254da5474488979f249, type: 3}
+  SoundCartridgeOut: {fileID: 8300000, guid: 86a692cf0db7ff842bffdba0c8286aed, type: 3}
+  SoundEmpty: {fileID: 8300000, guid: 3218610d36f622f41b94e040d94eecd6, type: 3}
+  SoundDraw: {fileID: 8300000, guid: 3218610d36f622f41b94e040d94eecd6, type: 3}
+  shootingMode: 1
+  Damage: 50
+  firingRate: 0.2
+  isADS: 0
+  cartridgeSize: 30
+  maximumBullets: 300
+  remainingBullets: 0
+  bulletsInCartridge: 0
+  timeAim: 7
   zoom: 40
   normal: 60
+  ADS: {x: 0.006, y: -0.735, z: -0.155}
+  shotFromHip: {x: 0.147, y: -0.755, z: -0.155}
 --- !u!1 &997174251
 GameObject:
   m_ObjectHideFlags: 0
@@ -7018,12 +7016,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombiePrefab: {fileID: 4898552129871800266, guid: 011eee32963fcea4fa17869cb3112c89, type: 3}
-  puntosDeGeneracion:
-  - {fileID: 1155579609}
-  - {fileID: 1155579609}
-  - {fileID: 1155579609}
-  - {fileID: 1155579609}
-  tiempoDeGeneracion: 3
+  zombieSpawners: []
+  generationTime: 5
 --- !u!1 &1288018446
 GameObject:
   m_ObjectHideFlags: 0
@@ -8455,11 +8449,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletImpact: {fileID: 8300000, guid: b48316b2bfecbf144bbc40fcc43bbcac, type: 3}
   audioSource: {fileID: 1715773029}
-  valor: 100
-  padreRef: {fileID: 0}
-  "multiplicadorDeDa\xF1o": 1
-  textoFlotantePrefab: {fileID: 8951894536708090279, guid: 36c5ef1b8b8cc4f4b952d40d29a968f9, type: 3}
-  "Da\xF1oTotal": 0
+  floatingTextPrefab: {fileID: 8951894536708090279, guid: 36c5ef1b8b8cc4f4b952d40d29a968f9, type: 3}
+  fatherRef: {fileID: 0}
+  value: 100
+  damageMultiplier: 1
+  fullDamage: 0
 --- !u!114 &1715773036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8474,10 +8468,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _musicManager: {fileID: 1110213652}
   menuLose: {fileID: 997174251}
-  vida: {fileID: 1715773035}
-  Vida0: 0
+  _hp: {fileID: 0}
   HUD: {fileID: 1642702188}
   score: {fileID: 3742821255760687084}
+  hp0: 0
 --- !u!4 &1716041376 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400006, guid: 95bbe2885334e3c46b79c3419edb469c, type: 3}
@@ -8605,15 +8599,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011227296186, guid: 9defeac88977c0d448aa4541073ee9e4, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.4
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4000011227296186, guid: 9defeac88977c0d448aa4541073ee9e4, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.4
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4000011227296186, guid: 9defeac88977c0d448aa4541073ee9e4, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.4
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4000011227296186, guid: 9defeac88977c0d448aa4541073ee9e4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9621,7 +9615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3742821256179588255, guid: 87f3033037dec8741b7f4b08f691b6fb, type: 3}
       propertyPath: m_Name
-      value: Puntaje
+      value: score
       objectReference: {fileID: 0}
     - target: {fileID: 5269263913694277985, guid: 87f3033037dec8741b7f4b08f691b6fb, type: 3}
       propertyPath: HUD

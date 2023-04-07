@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Vida0
+  m_Name: hp0
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -62,7 +62,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: DebeAtacar
+    m_ConditionEvent: MustAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7383012455830098629}
@@ -109,7 +109,7 @@ AnimatorController:
   m_Name: CA Zombie
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: DebeAtacar
+  - m_Name: MustAttack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0

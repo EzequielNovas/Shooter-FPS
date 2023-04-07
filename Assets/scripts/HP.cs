@@ -1,56 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class HP : MonoBehaviour
 {
     public AudioClip bulletImpact;
     public AudioSource audioSource;
-    public float valor = 100;
-    public HP padreRef;
-    public float multiplicadorDeDaño = 1.0f;
-    public GameObject textoFlotantePrefab;
-    public float DañoTotal;
+    public GameObject floatingTextPrefab;
+    public HP fatherRef;
+    public float value = 100;
+    public float damageMultiplier = 1.0f;
+    public float fullDamage;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-    public void RecibirDaño(float daño)
+    public void TakeDamage(float damage)
     {
         audioSource.PlayOneShot(bulletImpact);
-        daño *= multiplicadorDeDaño;
+        damage *= damageMultiplier;
 
-        if (padreRef!= null)
+        if (fatherRef!= null)
         {
-            padreRef.RecibirDaño(daño);
+            fatherRef.TakeDamage(damage);
             return;
         }
-        valor -= daño;
-        DañoTotal = daño;
-        if (valor>= 0)
-            MostrarTextoFlotante();
 
+        value -= damage;
+        fullDamage = damage;
 
-        if (valor < 0)
+        if (value>= 0)
+            ShowFloatingText();
+
+        if (value < 0)
         {
-            valor = 0;
-            MostrarTextoFlotante();
+            value = 0;
+            ShowFloatingText();
         }
     }
-    void  MostrarTextoFlotante()
+    void  ShowFloatingText()
     {
-        var go = Instantiate(textoFlotantePrefab, transform.position, Quaternion.identity, transform);
-        go.GetComponent<TextMesh>().text = DañoTotal.ToString();
+        var go = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity, transform);
+        go.GetComponent<TextMesh>().text = fullDamage.ToString();
     }
-    
 }
 
 

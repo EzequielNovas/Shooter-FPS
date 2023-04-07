@@ -1,238 +1,189 @@
-using JetBrains.Annotations;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Video;
-
-public enum ModoDeDisparo
+public enum ShootingMode
 {
     SemiAuto,
     FullAuto
 }
-
 public class WeaponLogic : MonoBehaviour
 {
     protected Animator animator;
     protected AudioSource audioSource;
-    public bool tiempoNoDisparo = false;
-    public bool puedeDisparar = false;
-    public bool recargando = false;
+    public bool timeNoShoot = false;
+    public bool canShoot = false;
+    public bool reloading = false;
 
-    [Header("Referencia de Objetos")]
-    public ParticleSystem fuegoDeArma;
-    public Camera camaraPrincipal;
-    public Transform PuntoDeDisparo;
-    public GameObject efectoDañoPrefab;
+    [Header("Object reference")]
+    public ParticleSystem gunFire;
+    public Camera mainCamera;
+    public Transform GunSight;
+    public GameObject damageEffectPrefab;
 
-    [Header("Referencia de Sonidos")]
-    public AudioClip SonDisparo;
-    public AudioClip SonSinBalas;
-    public AudioClip SonCartuchoEntra;
-    public AudioClip SonCartuchoSale;
-    public AudioClip SonVacio;
-    public AudioClip SonDesenfundar;
+    [Header("Sound reference")]
+    public AudioClip SoundShoot;
+    public AudioClip SoundNoBullets;
+    public AudioClip SoundCartridgeIn;
+    public AudioClip SoundCartridgeOut;
+    public AudioClip SoundEmpty;
+    public AudioClip SoundDraw;
 
-    [Header("Atributos de Arma")]
-    public ModoDeDisparo modoDeDisparo = ModoDeDisparo.FullAuto;
-    public float daño = 20f;
-    public float ritmoDeDisparo = 0.3f;
-    public int balasRestantes;
-    public int balasEnCartucho;
-    public int tamañoDeCartcho = 12;
-    public int maximoDeBalas = 100;
-    public bool estaADS = false;
-    public Vector3 disCadera;
-    public Vector3 ADS;
-    public float tiempoApuntar;
+    [Header("Weapon attributes")]
+    public ShootingMode shootingMode  = ShootingMode.FullAuto;
+    public float Damage               = 20f;
+    public float firingRate           = 0.3f;
+    public bool isADS                 = false;
+    public int cartridgeSize          = 12;
+    public int maximumBullets         = 100;
+    public int remainingBullets;
+    public int bulletsInCartridge;
+    public float timeAim;
     public float zoom;
     public float normal;
-    
-
-
-    // Use this for initialization
+    public Vector3 ADS;
+    public Vector3 shotFromHip;
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        animator = GetComponent<Animator>();
-
-        balasEnCartucho = tamañoDeCartcho;
-        balasRestantes = maximoDeBalas;
-
-        Invoke("HabilitarArmar", 0.5f);
+        audioSource        = GetComponent<AudioSource>();
+        animator           = GetComponent<Animator>();
+        bulletsInCartridge = cartridgeSize;
+        remainingBullets   = maximumBullets;
+        Invoke("EnabledArm", 0.5f);
     }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
-        if (modoDeDisparo == ModoDeDisparo.FullAuto && Input.GetButton("Fire1"))
-        {
-            RevisarDisparo();
-        }
-        else if (modoDeDisparo == ModoDeDisparo.SemiAuto && Input.GetButtonDown("Fire1"))
-        {
-            RevisarDisparo();
-        }
+        if (shootingMode == ShootingMode.FullAuto && Input.GetButton("Fire1"))
+            CheckShoot();
+
+        else if (shootingMode == ShootingMode.SemiAuto && Input.GetButtonDown("Fire1"))
+            CheckShoot();
 
         if (Input.GetButtonDown("Reload"))
-        {
-            RevisarRecargar();
-        }
+            CheckReload();
+
         if (Input.GetMouseButton(1))
         {
-            transform.localPosition = Vector3.Slerp(transform.localPosition, ADS, tiempoApuntar * Time.deltaTime);
-            estaADS = true;
-            camaraPrincipal.fieldOfView = Mathf.Lerp(camaraPrincipal.fieldOfView, zoom, tiempoApuntar * Time.deltaTime);
+            transform.localPosition = Vector3.Slerp(transform.localPosition, ADS, timeAim * Time.deltaTime);
+            isADS = true;
+            mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, zoom, timeAim * Time.deltaTime);
         }
+
         if (Input.GetMouseButtonUp(1))
-        {
-            estaADS = false;
-        }
+            isADS = false;
 
-        if (estaADS == false)
+        if (isADS == false)
         {
-            transform.localPosition = Vector3.Slerp(transform.localPosition, disCadera, tiempoApuntar * Time.deltaTime);
-            camaraPrincipal.fieldOfView = Mathf.Lerp(camaraPrincipal.fieldOfView, normal, tiempoApuntar * Time.deltaTime);
+            transform.localPosition = Vector3.Slerp(transform.localPosition, shotFromHip, timeAim * Time.deltaTime);
+            mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, normal, timeAim * Time.deltaTime);
         }
     }
 
-    void HabilitarArmar()
-    {
-        puedeDisparar = true;
-    }
+    void EnabledArm() => canShoot = true;
 
-    void RevisarDisparo()
+    void CheckShoot()
     {
-        if (!puedeDisparar) return;
-        if (tiempoNoDisparo) return;
-        if (recargando) return;
-        if (balasEnCartucho > 0)
-        {
-            Disparar();
-        }
+        if (!canShoot) return;
+        if (timeNoShoot) return;
+        if (reloading) return;
+        if (bulletsInCartridge > 0)
+            Shoot();
         else
-        {
-            SinBalas();
-        }
+            NoBullets();
     }
 
-    void Disparar()
+    void Shoot()
     {
-        audioSource.PlayOneShot(SonDisparo);
-        tiempoNoDisparo = true;
-        fuegoDeArma.Stop();
-        fuegoDeArma.Play();
-        ReproducirAnimacionDisparo();
-        balasEnCartucho--;
-        StartCoroutine(ReiniciarTiempoNoDisparo());
-        DisparoDirecto();
+        audioSource.PlayOneShot(SoundShoot);
+        timeNoShoot = true;
+        gunFire.Stop();
+        gunFire.Play();
+        PlayAnimationShoot();
+        bulletsInCartridge--;
+        StartCoroutine(ResetTimeNoShot());
+        DirectShot();
     }
-    public void CrearEfectoDaño(Vector3 pos, Quaternion rot)
+    public void CreateDamageEffect(Vector3 pos, Quaternion rot)
     {
-        GameObject efectoDaño = Instantiate(efectoDañoPrefab, pos, rot);
-        Destroy(efectoDaño, 1f);
+        GameObject damageEffect = Instantiate(damageEffectPrefab, pos, rot);
+        Destroy(damageEffect, 1f);
     }
-    void DisparoDirecto()
+    void DirectShot()
     {
         RaycastHit hit;
-        if (Physics.Raycast(PuntoDeDisparo.position, PuntoDeDisparo.forward, out hit))
+        if (Physics.Raycast(GunSight.position, GunSight.forward, out hit))
         {
-            if (hit.transform.CompareTag("Enemigo"))
+            if (hit.transform.CompareTag("Enemy"))
             {
                 HP HP = hit.transform.GetComponent<HP>();
                 if (HP == null)
                 {
-                    throw new System.Exception("No se encontro ek componente vida del enemigo");
+                    throw new System.Exception("Enemy health component not found");
                 }
                 else
                 {
-                    HP.RecibirDaño(daño);
-                    CrearEfectoDaño(hit.point,hit.transform.rotation);
+                    HP.TakeDamage(Damage);
+                    CreateDamageEffect(hit.point,hit.transform.rotation);
                 }
             }
         }
-
     }
 
-    public virtual void ReproducirAnimacionDisparo()
+    public virtual void PlayAnimationShoot()
     {
         if (gameObject.name == "Police9mm")
         {
-            if (balasEnCartucho > 1)
-            {
+            if (bulletsInCartridge > 1)
                 animator.CrossFadeInFixedTime("Fire", 0.1f);
-            }
             else
-            {
                 animator.CrossFadeInFixedTime("FireLast", 0.1f);
-            }
         }
         else
-        {
             animator.CrossFadeInFixedTime("Fire", 0.1f);
-        }
     }
 
-    void SinBalas()
+    void NoBullets()
     {
-        audioSource.PlayOneShot(SonSinBalas);
-        tiempoNoDisparo = true;
-        StartCoroutine(ReiniciarTiempoNoDisparo());
+        audioSource.PlayOneShot(SoundNoBullets);
+        timeNoShoot = true;
+        StartCoroutine(ResetTimeNoShot());
     }
-
-    IEnumerator ReiniciarTiempoNoDisparo()
+    IEnumerator ResetTimeNoShot()
     {
-        yield return new WaitForSeconds(ritmoDeDisparo);
-        tiempoNoDisparo = false;
+        yield return new WaitForSeconds(firingRate);
+        timeNoShoot = false;
     }
-
-    void RevisarRecargar()
+    void CheckReload()
     {
-        if (balasRestantes > 0 && balasEnCartucho < tamañoDeCartcho)
-        {
-            Recargar();
-        }
+        if (remainingBullets > 0 && bulletsInCartridge < cartridgeSize)
+            Reload();
     }
-
-    void Recargar()
+    void Reload()
     {
-        if (recargando) return;
-        recargando = true;
+        if (reloading) return;
+        reloading = true;
         animator.CrossFadeInFixedTime("Reload", 0.1f);
     }
-
-    void RecargarMuniciones()
+    void ReloadAmmunition()
     {
-        int balasParaRecargar = tamañoDeCartcho - balasEnCartucho;
-        int restarBalas = (balasRestantes >= balasParaRecargar) ? balasParaRecargar : balasRestantes;
-
-        balasRestantes -= restarBalas;
-        balasEnCartucho += balasParaRecargar;
+        int bulletsToReload       = cartridgeSize - bulletsInCartridge;
+        int subtractBullets       = (remainingBullets >= bulletsToReload) ? bulletsToReload : remainingBullets;
+        remainingBullets         -= subtractBullets;
+        bulletsInCartridge       += bulletsToReload;
     }
-
-    public void unfoundOn()
-    {
-        audioSource.PlayOneShot(SonDesenfundar);
-    }
-
     public void cartridgeInside()
     {
-        audioSource.PlayOneShot(SonCartuchoEntra);
-        RecargarMuniciones();
+        audioSource.PlayOneShot(SoundCartridgeIn);
+        ReloadAmmunition();
     }
-
     public void cartridgeOut()
     {
-        audioSource.PlayOneShot(SonCartuchoSale);
-        RecargarMuniciones();
+        audioSource.PlayOneShot(SoundCartridgeOut);
+        ReloadAmmunition();
     }
-
     public void empty()
     {
-        audioSource.PlayOneShot(SonVacio);
+        audioSource.PlayOneShot(SoundEmpty);
         Invoke("ReiniciarRecargar", 0.1f);
     }
-    void ReiniciarRecargar()
-    {
-        recargando = false;
-    }
+    void ReiniciarRecargar() => reloading = false;
+    public void unfoundOn() => audioSource.PlayOneShot(SoundDraw);
 }
